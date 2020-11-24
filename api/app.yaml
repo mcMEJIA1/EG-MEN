@@ -1,2 +1,2 @@
-runtimr: python37
+runtime: python37
 entrypoint: gunicorn -b :$PORT server:app
