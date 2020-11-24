@@ -1,0 +1,2 @@
+runtimr: python37
+entrypoint: gunicorn -b :$PORT server:app
