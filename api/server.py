@@ -3,6 +3,7 @@ from flask_cors import CORS
 from controllers.mensaje import Mensaje
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/mensaje', methods=['GET'])
 def getall():
