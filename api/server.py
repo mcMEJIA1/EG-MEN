@@ -24,7 +24,3 @@ def delete(id_men):
 def put():
     body = request.json
     return (Mensaje.put(body))
-
-
-if __name__ == '__main__':
- app.run(port = 3000, debug=True)
