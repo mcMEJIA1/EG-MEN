@@ -15,7 +15,7 @@ class Mensaje:
             json = dict(registro)
             lista.append(json)
         cnx.close
-        return jsonify(lista)
+        return jsonify(results = lista)
 
     def post(body):
         data = (body['asunto'],body['cuerpo'],body['remitente'],body['destinatario'],body['adjunto'],body['canal'],body['estado'])
