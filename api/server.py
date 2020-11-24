@@ -1,8 +1,6 @@
 from flask import Flask , request
-from flask import jsonify, request
 from flask_cors import CORS
 from controllers.mensaje import Mensaje
-from db.db import cnx
 
 app = Flask(__name__)
 
