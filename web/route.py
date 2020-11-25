@@ -5,15 +5,20 @@ import os
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 
-app = Flask(__name__, template_folder='templates', static_folder='static' )
+app = Flask(__name__, template_folder='templates')
 app.config['UPLOAD_FOLDER'] = './files'
 
-back_route = 'http://localhost:3000/mensaje'
+back_route = 'http://35.193.197.93/mensaje'
 canales = ['SMS','Email','WhatsApp']
 
 @app.route('/listMensajes', methods=['GET'])
 def getMensajes():
-    mensajes = requests.get(back_route).json()
+    res = requests.get(back_route)
+    if res:
+        mensajes = res.json()
+    else:
+        mensajes = {}
+    print(mensajes)
     return render_template('mensajes.html', mensajes=mensajes)
 
 
@@ -38,24 +43,11 @@ def postMensaje():
     else:
         mensaje['estado'] = 'enviado'
 
-    f = request.files['adjunto']
-
-    if f is None:
-        mensaje['adjunto'] = ''
-    else:
-        nombreA = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], nombreA))
-        route = nombreA
-        mensaje['adjunto'] = route
+    mensaje['adjunto'] = ''
 
     requests.post(back_route, json=mensaje)
 
     return (getMensajes())
-
-@app.route('/descargar/<string:file>', methods=['GET'])
-def descargar (file):
-    path = 'files/' + file
-    return send_file(path, as_attachment=True)
     
 @app.route('/delete/<string:message>')
 def delete (message):
