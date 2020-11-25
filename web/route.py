@@ -13,7 +13,7 @@ canales = ['SMS','Email','WhatsApp']
 
 @app.route('/listMensajes', methods=['GET'])
 def getMensajes():
-    mensajes = requests.get(back_route).json().get('results')
+    mensajes = requests.get(back_route).json()
     return render_template('mensajes.html', mensajes=mensajes)
 
 
