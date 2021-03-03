@@ -1,0 +1,2 @@
+api/** filter=git-crypt diff=git-crypt
+.gitattributes !fiter !diff
